@@ -1,15 +1,48 @@
 <template>
-  <ul class="dashboard">
-    <card
-      v-for="share of list"
-      :title="share.title"
-      :author="share.author"
-      :date="share.date"
-      @click="cardClick(share.id, $event)"
+  <div>
+    <ul class="dashboard">
+      <card
+        v-for="share of list"
+        :info="share"
+        @card-click="onCardClick"
+        @card-thumb="onCardThumb"
+      >
+      </card>
+    </ul>
+    <el-dialog
+      :title="currentCard.title + ' - 详情'"
+      v-model="dialogTableVisible"
+      v-if="currentCard"
+      top="5%"
+      size="large"
     >
-      <button @click="cardClick(share.id)">test</button>
-    </card>
-  </ul>
+      <span>{{currentCard.title}}</span>
+      <span>{{currentCard.author}}</span>
+      <span>{{currentCard.date}}</span>
+      <span>{{currentCard.thumbCount}}赞</span>
+
+      <div style="height: 240px;overflow-y: scroll;">
+        <p>这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内<br><br>容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这<br><br>是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内<br><br>容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容</p>
+      </div>
+
+      <div style="height: 160px;overflow-y: scroll;">
+        <el-card class="box-card" v-for="comment in currentCard.comments">
+          <div class="text item">
+            {{ comment }}
+          </div>
+        </el-card>
+      </div>
+
+      <el-input
+        type="textarea"
+        :autosize="{ minRows: 2, maxRows: 4}"
+        placeholder="请输入评论"
+        v-model="textarea">
+      </el-input>
+
+      <el-button type="primary">评论</el-button>
+    </el-dialog>
+  </div>
 </template>
 
 <script>
@@ -21,52 +54,98 @@ export default {
   data() {
     return {
       currentCard: null,
+      dialogTableVisible: false,
+      textarea: '',
       list: [
         {
           title: 'Effective Javascript',
           author: 'Kevin Hu',
           date: '2016-11-11',
           id: 1,
+          thumbCount: 0,
+          comments: [
+            '评论1',
+            '评论2',
+            '评论3',
+          ],
         },
         {
           title: 'Redux Introduction',
           author: 'Cagen',
           date: '2016-11-12',
           id: 2,
+          thumbCount: 0,
+          comments: [
+            '评论1',
+            '评论2',
+            '评论3',
+          ],
         },
         {
           title: 'Effective Javascript',
           author: 'Kevin Hu',
           date: '2016-11-11',
           id: 3,
+          thumbCount: 0,
+          comments: [
+            '评论1',
+            '评论2',
+            '评论3',
+          ],
         },
         {
           title: 'Redux Introduction',
           author: 'Cagen',
           date: '2016-11-12',
           id: 4,
+          thumbCount: 0,
+          comments: [
+            '评论1',
+            '评论2',
+            '评论3',
+          ],
         },
         {
           title: 'Effective Javascript',
           author: 'Kevin Hu',
           date: '2016-11-11',
           id: 5,
+          thumbCount: 0,
+          comments: [
+            '评论1',
+            '评论2',
+            '评论3',
+          ],
         },
         {
           title: 'Redux Introduction',
           author: 'Cagen',
           date: '2016-11-12',
           id: 6,
+          thumbCount: 0,
+          comments: [
+            '评论1',
+            '评论2',
+            '评论3',
+          ],
         },
       ],
     };
   },
 
   methods: {
-    cardClick(id, e) {
+    onCardClick(share) {
       /* eslint-disable no-console */
-      this.currentCard = id;
-      console.log(id, e);
+      this.currentCard = share;
+      console.log(share.id);
+      this.dialogTableVisible = true;
+    },
+
+    onCardThumb(share) {
+      console.log('thumb!', share.id);
+      const thumbShare = this.list.filter(everyShare => everyShare.id === share.id);
+      /* eslint-disable no-plusplus */
+      thumbShare[0].thumbCount ++;
     },
   },
 };
