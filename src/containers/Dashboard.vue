@@ -16,31 +16,47 @@
       top="5%"
       size="large"
     >
-      <span>{{currentCard.title}}</span>
-      <span>{{currentCard.author}}</span>
-      <span>{{currentCard.date}}</span>
-      <span>{{currentCard.thumbCount}}赞</span>
+      <el-row>
 
-      <div style="height: 240px;overflow-y: scroll;">
-        <p>这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内<br><br>容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这<br><br>是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内<br><br>容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容</p>
-      </div>
 
-      <div style="height: 160px;overflow-y: scroll;">
-        <el-card class="box-card" v-for="comment in currentCard.comments">
-          <div class="text item">
-            {{ comment }}
+        <el-col :span="15">
+          <span>{{currentCard.title}}</span>
+          <span>{{currentCard.author}}</span>
+          <span>{{currentCard.date}}</span>
+          <span @click="onCardThumb(currentCard)" style="cursor: pointer;">{{currentCard.thumbCount}}赞</span>
+
+          <div style="height: 310px;overflow-y: scroll;">
+            <p>这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内<br><br>容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这<br><br>是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内<br><br>容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容</p>
           </div>
-        </el-card>
-      </div>
 
-      <el-input
-        type="textarea"
-        :autosize="{ minRows: 2, maxRows: 4}"
-        placeholder="请输入评论"
-        v-model="textarea">
-      </el-input>
+          <div style="height: 180px;overflow-y: scroll;">
+            <el-card class="box-card" v-for="comment in currentCard.comments">
+              <div class="text item">
+                {{ comment }}
+              </div>
+            </el-card>
+          </div>
+        </el-col>
 
-      <el-button type="primary">评论</el-button>
+
+        <el-col :span="9">
+          <el-tabs style="width: 100%;">
+            <el-tab-pane label="输入评论">
+              <el-input
+                type="textarea"
+                :autosize="{ minRows: 2, maxRows: 4}"
+                placeholder="请输入评论"
+                v-model="textarea">
+              </el-input>
+            </el-tab-pane>
+            <el-tab-pane label="查看预览">查看预览</el-tab-pane>
+          </el-tabs>
+
+          <el-button type="primary">评论</el-button>
+        </el-col>
+
+        
+      </el-row>
     </el-dialog>
   </div>
 </template>
