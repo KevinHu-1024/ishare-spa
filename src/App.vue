@@ -1,19 +1,17 @@
 <template>
-  <div id="app">
+  <div>
     <top-header></top-header>
-    <dashboard></dashboard>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-  import TopHeader from './components/TopHeader';
-  import Dashboard from './components/Dashboard';
+  import TopHeader from './containers/TopHeader';
 
   export default {
     name: 'app',
     components: {
       TopHeader,
-      Dashboard,
     },
     data() {
       return {

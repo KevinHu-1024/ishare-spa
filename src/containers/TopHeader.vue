@@ -1,13 +1,13 @@
 <template>
   <nav class="top-header">
     <img src="../assets/logo.png">
-    <h1 class="title">智课·爱晒</h1>
+    <h1 class="title">爱晒</h1>
     <p>轻量的团队分享管理工具</p>
     <nav-menu></nav-menu>
   </nav>
 </template>
 <script>
-  import NavMenu from './NavMenu';
+  import NavMenu from '../components/NavMenu';
 
   export default {
     data() {
