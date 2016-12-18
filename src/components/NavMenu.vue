@@ -1,9 +1,9 @@
 <template>
   <div class="menu">
-    <a href="javascript:;">分享列表</a>
-    <a href="javascript:;">发布分享</a>
-    <a href="javascript:;">我的分享</a>
-    <a href="javascript:;">我的收藏</a>
+    <router-link to="/">分享列表</router-link>
+    <router-link to="/">发布分享</router-link>
+    <router-link to="/">我的分享</router-link>
+    <router-link to="/about">我的收藏</router-link>
   </div>
 </template>
 <script>
